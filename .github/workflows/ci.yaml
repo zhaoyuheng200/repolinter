@@ -87,17 +87,17 @@ jobs:
       - name: Docker Build
         uses: docker/build-push-action@v6
         with:
-          tags: todogroup/repolinter:latest
+          tags: zhaoyuheng200/repolinter:latest
           load: true
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 
       - name: Docker Run
-        run: docker run -t -v ${{ github.workspace }}:/src -w /src todogroup/repolinter:latest .
+        run: docker run -t -v ${{ github.workspace }}:/src -w /src zhaoyuheng200/repolinter:latest .
 
   publish-release:
     name: Publish a Release
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/test-release' }}
     needs: [test, test-docker]
     runs-on: ubuntu-latest
     steps:
